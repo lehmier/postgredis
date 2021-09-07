@@ -1,5 +1,5 @@
 create schema redis;
-
+drop table if exists redis.servers;
 create table redis.servers (
     env varchar(191),
     host varchar(191) default 'localhost',
@@ -7,5 +7,5 @@ create table redis.servers (
     password varchar(191) default null,
     database integer default null
 );
-
-insert into redis.servers (env, password) values ('dev', 'XXX');
+create or replace function redis.env() returns varchar as $$ select 'dev' $$ language sql;
+insert into redis.servers (env, password) values (redis.env(), 'XXX');

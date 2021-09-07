@@ -11,7 +11,7 @@ declare
     _port int;
     _password varchar;
 begin
-    select host, port, password from redis.servers where env = 'dev' into _host, _port, _password;
+    select host, port, password from redis.servers where env = redis.env() into _host, _port, _password;
     return redis.redis_exec(command, _host, _port, _password);
 end;
 $$ language plpgsql;
