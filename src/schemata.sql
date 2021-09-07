@@ -8,6 +8,4 @@ create table redis.servers (
     database integer default null
 );
 
-insert into redis.servers values (
-    'dev', 'localhost', 6379, 'XXX'
-);
+insert into redis.servers (env, password) values ('dev', 'XXX');
