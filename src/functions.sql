@@ -17,6 +17,16 @@ end;
 $$ language plpgsql;
 
 /**
+ * PING [message]
+ * https://redis.io/commands/ping
+ */
+create function redis.ping(message varchar default null) returns varchar as $$
+begin
+    return redis.exec('PING' || case when message is null then '' else ' ' || message end);
+end;
+$$ language plpgsql;
+
+/**
  * SET key value [EX seconds|PX milliseconds|EXAT timestamp|PXAT milliseconds-timestamp|KEEPTTL] [NX|XX] [GET] 
  * https://redis.io/commands/set
  */
